@@ -1,6 +1,7 @@
 package de.pkmnplatin.wnp4j.socket;
 
 import de.pkmnplatin.wnp4j.listener.ClientListener;
+import de.pkmnplatin.wnp4j.util.MathUtil;
 import de.pkmnplatin.wnp4j.util.MessageType;
 import de.pkmnplatin.wnp4j.util.PlaybackState;
 import de.pkmnplatin.wnp4j.util.TimeConverter;
@@ -212,20 +213,15 @@ public class SocketClient {
         sendMessage("previous");
     }
 
-    /**
-     *
-     * @param newProgress Progress in seconds
-     */
-    public void setProgress(int newProgress) {
-        sendMessage("setprogress " + newProgress);
+    public void setPostionMillis(long millis) {
+        double percentage = (getDuration() / 100) * millis;
+        sendMessage("SetPosition " + millis + ":SetProgress " + (percentage / 100.0D));
     }
 
-    /**
-     *
-     * @param newPosition Position in Percent
-     */
-    public void setPostion(int newPosition) {
-        sendMessage("setprogress " + newPosition);
+    public void setPostionPercent(double newPositionPercent) {
+        newPositionPercent = MathUtil.clamp(newPositionPercent, 0, 100) / 100.0D;
+        long millis = (long) (getDuration() * newPositionPercent);
+        sendMessage("SetPosition " + millis + ":SetProgress " + newPositionPercent);
     }
 
     public void setVolume(double newVolume) {

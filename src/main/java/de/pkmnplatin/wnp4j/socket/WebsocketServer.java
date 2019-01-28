@@ -37,7 +37,7 @@ public class WebsocketServer extends WebSocketServer {
         listeners.forEach(l -> l.onClientDisconnected(client));
         WNP4J.getInstance().getConnections().remove(client);
     }
-    
+
     @Override
     public void onMessage(WebSocket conn, String message) {
         SocketClient client = WNP4J.getInstance().getClient(conn);

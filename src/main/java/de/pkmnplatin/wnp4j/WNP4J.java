@@ -3,7 +3,6 @@ package de.pkmnplatin.wnp4j;
 import de.pkmnplatin.wnp4j.listener.SocketListener;
 import de.pkmnplatin.wnp4j.socket.SocketClient;
 import de.pkmnplatin.wnp4j.socket.WebsocketServer;
-import de.pkmnplatin.wnp4j.util.TimeConverter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.java_websocket.WebSocket;
