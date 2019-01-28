@@ -52,7 +52,13 @@ public class WNP4J {
     }
 
     public SocketClient getClient(WebSocket socket) {
-        return connections.stream().filter(sc -> sc.getSocket().equals(socket)).findFirst().orElse(null);
+        for (int i = 0; i < connections.size(); i++) {
+            SocketClient c = connections.get(i);
+            if (c != null && c.getSocket() != null && c.getSocket().equals(socket)) {
+                return c;
+            }
+        }
+        return null;
     }
 
 }
