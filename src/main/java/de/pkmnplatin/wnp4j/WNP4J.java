@@ -17,13 +17,6 @@ public class WNP4J {
 
     private static WNP4J instance;
 
-    public static WNP4J getInstance() {
-        if(instance == null) {
-            instance = new WNP4J();
-        }
-        return instance;
-    }
-
     private static Logger logger = Logger.getLogger("WNP4J");
 
     @Getter(AccessLevel.NONE)
@@ -33,14 +26,21 @@ public class WNP4J {
     private List<SocketClient> connections = new ArrayList<>();
     private final int port = 8974;
 
-    public void addListener(SocketListener listener) {
-        if(this.serverSocket != null) {
-            this.serverSocket.getListeners().add(listener);
-        }
-    }
-
     private WNP4J() {
         (serverSocket = new WebsocketServer(this.port)).start();
+    }
+
+    public static WNP4J getInstance() {
+        if (instance == null) {
+            instance = new WNP4J();
+        }
+        return instance;
+    }
+
+    public void addListener(SocketListener listener) {
+        if (this.serverSocket != null) {
+            this.serverSocket.getListeners().add(listener);
+        }
     }
 
     public void shutdown() {
