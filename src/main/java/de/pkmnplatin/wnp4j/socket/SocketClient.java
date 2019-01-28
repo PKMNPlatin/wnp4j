@@ -219,7 +219,7 @@ public class SocketClient {
     }
 
     public void setPostionPercent(double newPositionPercent) {
-        newPositionPercent = MathUtil.clamp(newPositionPercent, 0, 100) / 100.0D;
+        newPositionPercent = MathUtil.clamp(newPositionPercent, 0D, 100D) / 100.0D;
         long millis = (long) (getDuration() * newPositionPercent);
         sendMessage("SetPosition " + millis + ":SetProgress " + newPositionPercent);
     }
