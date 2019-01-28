@@ -36,6 +36,9 @@ public class WebsocketServer extends WebSocketServer {
         SocketClient client = WNP4J.getInstance().getClient(conn);
         listeners.forEach(l -> l.onClientDisconnected(client));
         WNP4J.getInstance().getConnections().remove(client);
+        if (WNP4J.getInstance().getLastActiveDevice().equals(client)) {
+            setLastActive(null);
+        }
     }
 
     @Override
